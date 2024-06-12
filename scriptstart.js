@@ -1,4 +1,4 @@
-const margin = { top: 70, right: 30, bottom: 40, left: 80 }; 
+const margin = { top: 70, right: 300, bottom: 40, left: 80 }; 
 const width = 1200 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
@@ -14,22 +14,35 @@ const svg = d3.select("#chart-container")
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// Load the CSV file
-d3.csv("Valodata.csv").then(function(data) {
-  console.log("Data loaded:", data); // Debugging step
+// Load the CSV files
+Promise.all([
+  d3.csv("Valodata.csv"),
+  d3.csv("csgodata.csv")
+]).then(function(files) {
+  const valoData = files[0];
+  const csgoData = files[1];
 
-  // Parse the date and value from the CSV file
+  console.log("ValoData loaded:", valoData); // Debugging step
+  console.log("CsgoData loaded:", csgoData); // Debugging step
+
+  // Parse the date and value from the CSV files
   const parseDate = d3.timeParse("%Y-%m-%d");
-  data.forEach(function(d) {
+  valoData.forEach(function(d) {
+    d.date = parseDate(d.date);
+    d.value = +d.value;
+  });
+  csgoData.forEach(function(d) {
     d.date = parseDate(d.date);
     d.value = +d.value;
   });
 
-  console.log("Parsed data:", data); // Debugging step
+  console.log("Parsed ValoData:", valoData); // Debugging step
+  console.log("Parsed CsgoData:", csgoData); // Debugging step
 
   // Set the domains of the scales
-  x.domain(d3.extent(data, d => d.date));
-  y.domain([0, d3.max(data, d => d.value)]);
+  const allData = [...valoData, ...csgoData];
+  x.domain(d3.extent(allData, d => d.date));
+  y.domain([0, d3.max(allData, d => d.value)]);
 
   // Add the x-axis
   svg.append("g")
@@ -44,18 +57,50 @@ d3.csv("Valodata.csv").then(function(data) {
       .ticks(10)
       .tickFormat(d3.format(".2s"))); // Format large numbers
 
-  // Create the line generator
-  const line = d3.line()
+  // Create the line generators
+  const valoLine = d3.line()
     .x(d => x(d.date))
     .y(d => y(d.value));
 
-  // Add the line path
+  const csgoLine = d3.line()
+    .x(d => x(d.date))
+    .y(d => y(d.value));
+
+  // Add the ValoData line path
   svg.append("path")
-    .datum(data)
+    .datum(valoData)
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-width", 1.5)
-    .attr("d", line);
+    .attr("d", valoLine);
+
+  // Add the CsgoData line path
+  svg.append("path")
+    .datum(csgoData)
+    .attr("fill", "none")
+    .attr("stroke", "orange")
+    .attr("stroke-width", 1.5)
+    .attr("d", csgoLine);
+
+  // Add labels for each dataset at the end of the lines
+  // Add labels for each dataset at the end of the lines
+svg.append("text")
+.attr("transform", `translate(${width + 10},${y(valoData[valoData.length - 1].value)})`) // Move text to the right by 10 units
+.attr("dy", "0.35em")
+.attr("text-anchor", "start") // Anchor text to the start (left) of the text element
+.style("fill", "steelblue")
+.text("Valorant")
+.style("font-family", "Ariel");
+
+svg.append("text")
+.attr("transform", `translate(${width + 10},${y(csgoData[csgoData.length - 1].value)})`) // Move text to the right by 10 units
+.attr("dy", "0.35em")
+.attr("text-anchor", "start") // Anchor text to the start (left) of the text element
+.style("fill", "orange")
+.text("CS:GO")
+.style("font-family", "Ariel");
+
+
 }).catch(function(error) {
   console.error('Error loading or parsing data:', error);
 });

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIZES POOL CHART</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="text/javascript">
+        function populate(game,region){
+            var s1 = document.getElementById(game);
+            var s2 = document.getElementById(region);
+            s2.innerHTML = "";
+            if(s1.value == "val"){
+                var optionArray = ["|","america|America","emea|EMEA","pacific|Pacific"];
+            } else if(s1.value == "cs"){
+                var optionArray = ["|","america|America","emea|EMEA","pacific|Pacific"];
+            }
+            for(var option in optionArray){
+                var pair = optionArray[option].split("|");
+                var newOption = document.createElement("option");
+                newOption.value = pair[0];
+                newOption.innerHTML = pair[1];
+                s2.options.add(newOption);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>PRIZES POOL CHART</h1>
+    <hr>
+        Choose Game:
+        <select id="game" name="game" onchange="populate(this.id,'region')">
+            <option value=""></option>
+            <option value="val">VALORANT</option>
+            <option value="cs">COUNTER-STRIKE</option>
+        </select>
+    </hr>
+    
+    Choose Region:
+    <select id="region" name="region"></select>
+
+    <div id="chart"></div>
+
+    <script src="prizeschart/americacs.js"></script>
+    <script src="prizeschart/americaval.js"></script>
+    <script src="prizeschart/emeacs.js"></script>
+    <script src="prizeschart/emeaval.js"></script>
+    <script src="prizeschart/pacificcs.js"></script>
+    <script src="prizeschart/pacificval.js"></script>
+    <script src="barchart.js"></script>
+</body>
+</html>

@@ -16,8 +16,8 @@ const svg = d3.select("#chart-container")
 
 // Load the CSV files
 Promise.all([
-  d3.csv("Valodata.csv"),
-  d3.csv("csgodata.csv")
+  d3.csv("data/Valodata.csv"),
+  d3.csv("data/csgodata.csv")
 ]).then(function(files) {
   const valoData = files[0];
   const csgoData = files[1];

@@ -1,0 +1,81 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    image-resolution: from-image 300di;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px;
+}
+
+a:hover {
+    color: #3c00ff;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-transform: uppercase;
+}
+
+#title {
+    line-height: 28px;
+    text-align: center;
+}
+
+#sub-title {
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+#line-chart {
+    /* text-align: center; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#link {
+    display: flex;
+    flex-direction: row;
+    text-transform: uppercase;
+    justify-content: space-around;
+}

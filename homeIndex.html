@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>SENT1NELS TEAM</title>
-    <style>
-        #background{
-        background-color: bisque;
-    }
-</style>    
+    <link rel="stylesheet" href="./index/style/home.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="icon" href="bar-chart.png" />
 </head>
-<body id="background">
-    <h1>Menu</h1>
 
-    <a href="index/lineChartIndex.html" target="content">PLAYER COUNT LINE CHART</a>
-    <p>GeoMap</p>
-    <ul>
-        <li><a href="index/geoMapCS.html" target="content">CS2</a></li>
-        <li><a href="index/geoMapVAL.html" target="content">Valorant</a></li>
-    </ul>
-    <p>Combination Chart</p>
-    <ul>
-        <li><a href="index/Views&ChannelsCS.html" target="content">CS2</a></li>
-        <li><a href="index/Views&ChannelsValo.html" target="content">Valorant</a></li>
-    </ul>
-    <br>
-    <a href="index/prizesIndex.html" target ="content">PRIZES POOL BAR CHART</a>
+<body>
+
+    <h1 id="title">
+        <div>DATA VISUALIZATION </div>
+        <div>WHICH GAME IS MORE PROFIT? CS:GO OR VALORANT</div>
+    </h1>
+
+    <p id="sub-title">The project of data visualization making by Sent1nels team</p>
+
+    <div id="game">
+        <div>
+            <h2>cs:go</h2>
+        </div>
+        <div>
+            <h2>valorant</h2>
+        </div>
+    </div>
+
+    <div id="game">
+        <div>
+            <a href="index/geoMapCS.html" target="content">world player count from 2022-2023 (geomap)</a>
+        </div>
+        <div>
+            <a href="index/geoMapVAL.html" target="content">world player count from 2022-2023 (geomap)</a>
+        </div>
+    </div>
+
+    <div id="game">
+        <div>
+            <a href="index/Views&ChannelsCS.html" target="content">viewer and stream from 2021-2024</a>
+        </div>
+        <div>
+            <a href="index/Views&ChannelsValo.html" target="content">viewer and stream from 2021-2024</a>
+        </div>
+    </div>
+
+    <a href="index/lineChartIndex.html" target="content" id="line-chart">PLAYER COUNT CHART FROM 2020 TO 2024</a>
+    <a href="index/prizesIndex.html" target="content" id="line-chart">PRIZES POOL BAR CHART</a>
+
 
 </body>
+
 </html>
